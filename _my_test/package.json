@@ -1,0 +1,19 @@
+{
+  "name": "_my_test",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "readEnv.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/preset-env": "^7.23.2",
+    "@types/jest": "^29.5.7",
+    "dotenv": "^16.3.1",
+    "jest": "^29.7.0"
+  }
+}
