@@ -1,5 +1,5 @@
 {
-  "include": ["src", "tests", "examples"],
+  "include": ["src", "tests", "examples", "_my_examples/hello.ts"],
   "exclude": ["src/_shims/**/*-deno.ts"],
   "compilerOptions": {
     "target": "es2020",

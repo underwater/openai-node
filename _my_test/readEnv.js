@@ -1,7 +1,15 @@
 
 import dotenv from 'dotenv';
-dotenv.config();
-const readEnv = process.env.OPENAI_API_KEY;
-console.log(`readEnv: ${readEnv}`);
 
-export default readEnv;
+
+setTimeout(() => {
+    console.log(`end of delay`);
+    dotenv.config({ path: `./.env`, override: true });
+    const readEnv = process.env.OPENAI_API_KEY;
+}, 30000);
+
+// fudge
+
+
+
+//export default readEnv;
