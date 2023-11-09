@@ -2,7 +2,9 @@
 
 import * as Core from 'openai/core';
 import { APIResource } from 'openai/resource';
+import { isRequestOptions } from 'openai/core';
 import * as ThreadsAPI from 'openai/resources/beta/threads/threads';
+import * as Shared from 'openai/resources/shared';
 import * as MessagesAPI from 'openai/resources/beta/threads/messages/messages';
 import * as RunsAPI from 'openai/resources/beta/threads/runs/runs';
 
@@ -13,7 +15,15 @@ export class Threads extends APIResource {
   /**
    * Create a thread.
    */
-  create(body: ThreadCreateParams, options?: Core.RequestOptions): Core.APIPromise<Thread> {
+  create(body?: ThreadCreateParams, options?: Core.RequestOptions): Core.APIPromise<Thread>;
+  create(options?: Core.RequestOptions): Core.APIPromise<Thread>;
+  create(
+    body: ThreadCreateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<Thread> {
+    if (isRequestOptions(body)) {
+      return this.create({}, body);
+    }
     return this.post('/threads', {
       body,
       ...options,
@@ -270,46 +280,12 @@ export namespace ThreadCreateAndRunParams {
   }
 
   export interface AssistantToolsFunction {
-    /**
-     * The function definition.
-     */
-    function: AssistantToolsFunction.Function;
+    function: Shared.FunctionDefinition;
 
     /**
      * The type of tool being defined: `function`
      */
     type: 'function';
-  }
-
-  export namespace AssistantToolsFunction {
-    /**
-     * The function definition.
-     */
-    export interface Function {
-      /**
-       * A description of what the function does, used by the model to choose when and
-       * how to call the function.
-       */
-      description: string;
-
-      /**
-       * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain
-       * underscores and dashes, with a maximum length of 64.
-       */
-      name: string;
-
-      /**
-       * The parameters the functions accepts, described as a JSON Schema object. See the
-       * [guide](https://platform.openai.com/docs/guides/gpt/function-calling) for
-       * examples, and the
-       * [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for
-       * documentation about the format.
-       *
-       * To describe a function that accepts no parameters, provide the value
-       * `{"type": "object", "properties": {}}`.
-       */
-      parameters: Record<string, unknown>;
-    }
   }
 }
 

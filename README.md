@@ -21,7 +21,7 @@ You can import in Deno via:
 <!-- x-release-please-start-version -->
 
 ```ts
-import OpenAI from 'https://deno.land/x/openai@4.16.0/mod.ts';
+import OpenAI from 'https://deno.land/x/openai@v4.17.0/mod.ts';
 ```
 
 <!-- x-release-please-end -->
@@ -413,7 +413,7 @@ import OpenAI from "openai";
 ```
 
 To do the inverse, add `import "openai/shims/node"` (which does import polyfills).
-This can also be useful if you are getting the wrong TypeScript types for `Response` - more details [here](https://github.com/openai/openai-node/src/_shims#readme).
+This can also be useful if you are getting the wrong TypeScript types for `Response` - more details [here](https://github.com/openai/openai-node/tree/master/src/_shims#readme).
 
 You may also provide a custom `fetch` function when instantiating the client,
 which can be used to inspect or alter the `Request` or `Response` before/after each request:
